@@ -1,7 +1,18 @@
 //call back hell
 window.addEventListener('load',function(){
 
-    getCountryData("GET","https://restcountries.com/v2/all").then(onSuccess,OnFailure);
+
+    async function execAsync(){
+        try{
+            let response=  await  getCountries("GET","https://restcountries.com/v2/all");
+            console.log(response);
+        }catch(error){
+            console.log(error)
+        }
+    }
+
+    execAsync();
+    //getCountryData("GET","https://restcountries.com/v2/all").then(onSuccess,OnFailure);
 //Event listener
 
     window.addEventListener('click',function(){
@@ -17,13 +28,25 @@ window.addEventListener('load',function(){
 
 })
 
-function onSuccess(countries){
 
-    countries.forEach(country=>{
-        console.log(country.name);
-    })
+
+
+
+
+
+
+async function onSuccess(countries){
+
+    let data=await countries;
+    if(data!=undefined)
+       console.log(data);
+
+
+
+
 }
 
-function OnFailure(error){
-   console.log(error);
+async function OnFailure(error){
+    let errorData= await error;
+   console.log(errorData);
 }
