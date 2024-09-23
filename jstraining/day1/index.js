@@ -1,6 +1,7 @@
 //call back hell
 window.addEventListener('load',function(){
 
+    getCountryData("GET","https://restcountries.com/v2/all").then(onSuccess,OnFailure);
 //Event listener
 
     window.addEventListener('click',function(){
@@ -15,3 +16,14 @@ window.addEventListener('load',function(){
     })
 
 })
+
+function onSuccess(countries){
+
+    countries.forEach(country=>{
+        console.log(country.name);
+    })
+}
+
+function OnFailure(error){
+   console.log(error);
+}
