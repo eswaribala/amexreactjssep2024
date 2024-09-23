@@ -13,8 +13,12 @@ for(let i=0;i<100;i++){
     customers.push(customer);
 }
 
+const start=Date.parse('01 Jan 1970 00:00:00' );
+const end=Date.now();
 customers.forEach(customer=>{
-    console.log(`${customer.firstName}","${customer.lastName}","${customer.dob.toDateString()}`);
+
+    if((customer.dob>start)&&(customer.dob<end))
+         console.log(`${customer.firstName}","${customer.lastName}","${customer.dob.toDateString()}`);
 })
 
 
