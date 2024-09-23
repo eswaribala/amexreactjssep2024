@@ -6,11 +6,11 @@ getCountries=async (methodName,url)=> {
         xhr.send()
 
         //retrieve response
-        xhr.onreadystatechange = function () {
+        xhr.onreadystatechange = await function () {
             if (xhr.readyState === 4) {
                 if (xhr.status === 200) {
                     console.log("xhr done successfully");
-                    var resp = xhr.responseText;
+                    var resp =  xhr.responseText;
                     response = JSON.parse(resp);
                      return response;
                 }
