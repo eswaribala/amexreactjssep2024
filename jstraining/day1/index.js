@@ -1,7 +1,7 @@
 //call back hell
 window.addEventListener('load',function(){
 
-    fetchCountriesJSON().then(countries => {
+    fetchCountriesJSON("https://restcountries.com/v2/all").then(countries => {
         countries.forEach(country=>{
             console.log(country.name);
         })

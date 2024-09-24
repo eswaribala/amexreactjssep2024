@@ -19,8 +19,8 @@ async function getData(methodName,url) {
 */
 
 
-async function fetchCountriesJSON() {
-    const response = await fetch('https://restcountries.com/v2/all');
+async function fetchCountriesJSON(url) {
+    const response = await fetch(url);
     const countries = await response.json();
     return countries;
 }
