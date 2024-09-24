@@ -1,33 +1,18 @@
-export class Transaction{
+export  class Transaction{
+
+    //static variables
+    static count=0;
     constructor(transactionNo,amount,dateOfTransaction) {
 
+        Transaction.count++;
         this._transactionNo = transactionNo;
         this._amount = amount;
         this._dateOfTransaction = dateOfTransaction;
     }
 
-
-    get transactionNo() {
-        return this._transactionNo;
+    static getCount(){
+        return Transaction.count;
     }
 
-    set transactionNo(value) {
-        this._transactionNo = value;
-    }
 
-    get amount() {
-        return this._amount;
-    }
-
-    set amount(value) {
-        this._amount = value;
-    }
-
-    get dateOfTransaction() {
-        return this._dateOfTransaction;
-    }
-
-    set dateOfTransaction(value) {
-        this._dateOfTransaction = value;
-    }
 }
