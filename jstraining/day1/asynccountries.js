@@ -1,28 +1,28 @@
-getCountries=async (methodName,url)=> {
- let response=undefined;
-  let xhr = new XMLHttpRequest();
-    try{
-        xhr.open(methodName, url, true);
-        xhr.send()
-
-        //retrieve response
-        xhr.onreadystatechange = await function () {
-            if (xhr.readyState === 4) {
-                if (xhr.status === 200) {
-                    console.log("xhr done successfully");
-                    var resp =  xhr.responseText;
-                    response = JSON.parse(resp);
-                     return response;
+/*
+async function getData(methodName,url) {
+    var xhr = new XMLHttpRequest();
+    return new Promise(function(resolve, reject) {
+        xhr.open(methodName, url, true)
+        xhr.send();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4) {
+                if (xhr.status >= 300) {
+                    reject("Error, status code = " + xhr.status)
+                } else {
+                    resolve(JSON.parse(xhr.responseText));
                 }
-            } else {
-                console.log("xhr processing going on");
             }
         }
 
-    }catch(error){
-           response=error.toString();
-           return response;
-    }
-
+    });
 }
+*/
+
+
+async function fetchCountriesJSON() {
+    const response = await fetch('https://restcountries.com/v2/all');
+    const countries = await response.json();
+    return countries;
+}
+
 

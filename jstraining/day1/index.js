@@ -1,17 +1,27 @@
 //call back hell
 window.addEventListener('load',function(){
 
+    fetchCountriesJSON().then(countries => {
+        countries.forEach(country=>{
+            console.log(country.name);
+        })
+    });
 
-    async function execAsync(){
-        try{
-            let response=  await  getCountries("GET","https://restcountries.com/v2/all");
-            console.log(response);
-        }catch(error){
-            console.log(error)
+/*
+    async function logCountryData() {
+        try {
+            let countries = await getData("GET","https://restcountries.com/v2/all")
+
+          countries.forEach(country=>{
+                console.log(country.name);
+            })
+        } catch (err) {
+            console.log(err)
         }
     }
+    logCountryData()
+*/
 
-    execAsync();
     //getCountryData("GET","https://restcountries.com/v2/all").then(onSuccess,OnFailure);
 //Event listener
 
