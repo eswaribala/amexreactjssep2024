@@ -9,7 +9,7 @@ import axios from "axios";
 import {LoginUrl} from '../../resources/configurations/config'
 import {Alert} from "@mui/lab";
 
-function Login(){
+function Login({LoginState}){
 
     //step1 snackbar
     const [open,setOpen]=useState(false);
@@ -33,16 +33,35 @@ function Login(){
                 "email":values.email,
                 "password":values.password
             }
-            
+
+
            axios.post(LoginUrl,data).then(response=>{
                console.log(response.data.token);
                setOpen(true)
+               LoginState(true);
 
            },error=>{
                alert(error);
                setPass(true);
            })
 
+            /*
+            fetch(LoginUrl, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: data
+            }).then(response=>{
+                console.log(response);
+                setOpen(true)
+            },error=>{
+                alert(error);
+                setPass(true);
+            })
+
+             */
         }
     })
 
