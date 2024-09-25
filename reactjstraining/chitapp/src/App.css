@@ -22,7 +22,8 @@
   padding: 2%;
 }
 .App-header {
-  border:2px solid red;
+  background-color: #282c34;
+
   min-height: 10vh;
   display: flex;
   flex-direction: row;
