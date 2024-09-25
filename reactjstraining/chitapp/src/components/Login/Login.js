@@ -29,6 +29,7 @@ function Login(){
         },
         validationSchema:yupValidationSchema,
         onSubmit:function(values){
+             alert(values.email+","+values.password);
 
         }
     })
@@ -38,7 +39,7 @@ function Login(){
 
     return(
         <Box sx={{ p: 2, width:'30%' }}>
-            <form>
+            <form onSubmit={formik.handleSubmit} >
                 <fieldset>
                     <legend className="legend">Customer Login</legend>
                     <CustomTextField id="email" label="Email" type="email" value={formik.values.email}
@@ -57,7 +58,7 @@ function Login(){
 
                     />
                    {/* <CustomTextField id="captcha" label="captcha"/>*/}
-                    <CustomButton text="Login" color="success" variant="contained" ></CustomButton>
+                    <CustomButton text="Login" type="submit" color="success" variant="contained" ></CustomButton>
                 </fieldset>
             </form>
         </Box>

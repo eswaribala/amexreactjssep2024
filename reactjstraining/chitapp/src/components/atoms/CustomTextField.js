@@ -6,6 +6,7 @@ export function CustomTextField({id,label,type,value,onBlur,onChange,error,helpe
 
     return(
         <TextField id={id}  label={label} type={type} value={value}
+
                    onBlur={e=>onBlur(e)}
                    onChange={e=>onChange(e)}
                    error={error}
