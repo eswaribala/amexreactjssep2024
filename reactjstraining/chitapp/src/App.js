@@ -20,6 +20,7 @@ export function App() {
    <div>
      <header className="App-header">
         <Logo/>
+         <h1 className="multicolortext">Chit Application </h1>
         <Timer/>
      </header>
     </div>

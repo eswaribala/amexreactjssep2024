@@ -1,29 +1,34 @@
 import React, {useEffect, useState} from 'react';
-
+import './Timer.css'
 
 export function Timer(){
-    //step1
-    //state
-    const[currentDateTime,setCurrentDateTime]=useState(new Date());
-    //step2
-    //updates the current time
+
+//step 1
+// create state
+    const [currentDateTime,setCurrentDateTime]=useState(new Date());
+
+//step 2
+//update state
+
     useEffect(() => {
         setInterval(()=>{
             setCurrentDateTime(new Date())
         },1000)
     }, [currentDateTime]);
 
+
     return(
+        /*Step 3
+        display timer*/
         <div>
-            {/*Step3
-            Display state*/}
-            <h6>{currentDateTime.toLocaleTimeString()}</h6>
+            <h6 className="timer">{currentDateTime.toLocaleTimeString()}</h6>
         </div>
+
     )
+
 
 
 }
 
 
 
-export default Timer;
