@@ -1,21 +1,19 @@
 import React, {useEffect, useState} from 'react';
-import {Box, Button, TextField} from "@mui/material";
+import {Box, Button, Snackbar, TextField} from "@mui/material";
 import './Login.css'
 import {CustomTextField} from "../atoms/CustomTextField";
 import {CustomButton} from "../atoms/CustomButton";
 import  * as yup from 'yup';
 import {useFormik} from "formik";
+import axios from "axios";
+import {LoginUrl} from '../../resources/configurations/config'
+import {Alert} from "@mui/lab";
 
 function Login(){
 
-    //value state
-    const [value,setValue]=useState('');
-
-    useEffect((value) => {
-        setValue(value)
-
-    }, [value]);
-
+    //step1 snackbar
+    const [open,setOpen]=useState(false);
+    const [pass,setPass]=useState(false);
 
     const yupValidationSchema=yup.object({
         email:yup.string("Enter Email").email("Enter Valid Email").required("Must Enter email"),
@@ -28,17 +26,52 @@ function Login(){
             password:""
         },
         validationSchema:yupValidationSchema,
+
+
         onSubmit:function(values){
-             alert(values.email+","+values.password);
+            let data={
+                "email":values.email,
+                "password":values.password
+            }
+            
+           axios.post(LoginUrl,data).then(response=>{
+               console.log(response.data.token);
+               setOpen(true)
+
+           },error=>{
+               alert(error);
+               setPass(true);
+           })
 
         }
     })
 
-
+     function handleClose(){
+        setOpen(false);
+     }
 
 
     return(
         <Box sx={{ p: 2, width:'30%' }}>
+            <Snackbar open={open}
+                      autoHideDuration={5000}
+                      onClose={handleClose}
+                      sx={{
+                          '&.MuiSnackbar-root': { top: '1%', left:'50%' }
+                      }}>
+                <Alert onClose={handleClose}
+                       severity="success"
+                       variant="filled"
+                       sx={{
+
+                           width: '100%'
+                       }}>
+                Login Successful
+                </Alert>
+
+            </Snackbar>
+
+
             <form onSubmit={formik.handleSubmit} >
                 <fieldset>
                     <legend className="legend">Customer Login</legend>
@@ -49,6 +82,10 @@ function Login(){
                                      helperText={formik.touched.email && formik.errors.email}
 
                     />
+                    {
+                        (pass)?<p>Invalid Password</p>:<p></p>
+
+                    }
                     <CustomTextField id="password" label="Password" type="password" value={formik.values.password}
                                      onBlur={formik.handleBlur}
                                      onChange={formik.handleChange}
