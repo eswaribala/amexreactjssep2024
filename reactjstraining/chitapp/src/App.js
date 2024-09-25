@@ -1,6 +1,7 @@
 import './App.css';
 import {Component} from "react";
-import {Logo} from './components/logo/logo'
+import {Logo} from './components/logo/Logo'
+import {Timer} from './components/Timer/Timer'
 /*
 class App extends Component{
     constructor(props) {
@@ -19,6 +20,7 @@ export function App() {
    <div>
      <header className="App-header">
         <Logo/>
+        <Timer/>
      </header>
     </div>
   );

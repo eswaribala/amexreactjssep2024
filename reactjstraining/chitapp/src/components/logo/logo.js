@@ -1,6 +1,6 @@
 import React from 'react';
 import LogoPath from '../../resources/images/logo.jpeg'
-import './logo.css'
+import './Logo.css'
 //stateless component
 export const Logo = () => (
  <figure>
