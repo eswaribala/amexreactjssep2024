@@ -2,6 +2,7 @@ import './App.css';
 import {Component} from "react";
 import {Logo} from './components/logo/Logo'
 import {Timer} from './components/Timer/Timer'
+import Banner from './components/Banner/Banner'
 /*
 class App extends Component{
     constructor(props) {
@@ -23,6 +24,9 @@ export function App() {
          <h1 className="multicolortext">Chit Application </h1>
         <Timer/>
      </header>
+     <section>
+         <Banner/>
+     </section>
     </div>
   );
 }

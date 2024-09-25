@@ -1,15 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { BannerWrapper } from './Banner.styled';
-
+import BannerPath from '../../resources/images/banner.png'
+import './Banner.css'
 const Banner = () => (
- <BannerWrapper>
-    Banner Component
- </BannerWrapper>
+ <figure>
+     <img src={BannerPath} className="banner"/>
+ </figure>
 );
 
-Banner.propTypes = {};
-
-Banner.defaultProps = {};
 
 export default Banner;
