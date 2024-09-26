@@ -1,7 +1,8 @@
 import React from 'react';
 import {TextField} from "@mui/material";
 
-const FormInput = ({ label, name, type, value, onChange, error, ...props }) => {
+const FormInput = ({ label, name, type, value, onChange, error}) => {
+
     return (
         <div style={{ marginBottom: '10px' }}>
             <label>{label}</label>
@@ -12,9 +13,8 @@ const FormInput = ({ label, name, type, value, onChange, error, ...props }) => {
                 type={type}
                 value={value}
                 onChange={onChange}
-
-                {...props}
             />
+
             {error && <span style={{ color: 'red' }}>{error}</span>}
         </div>
     );
