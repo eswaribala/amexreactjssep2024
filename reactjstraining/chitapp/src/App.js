@@ -20,7 +20,7 @@ class App extends Component{
     }
 }
 */
-export function App() {
+export function App({...props}) {
 
     const [loginStatus, setLoginStatus] = useState(false);
     const [forgotPasswordStatus, setForgotPasswordStatus] = useState(false);
@@ -52,7 +52,7 @@ export function App() {
         <div>
             <header className="App-header">
                 <Logo/>
-                <h1 className="multicolortext">Chit Application </h1>
+                <h1 className="multicolortext">{props.name} </h1>
                 <Timer/>
             </header>
             {
@@ -66,6 +66,7 @@ export function App() {
 
                         <section>
                             <Dashboard/>
+
                         </section>
 
             }

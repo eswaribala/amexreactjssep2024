@@ -4,14 +4,9 @@ import {CustomButton} from "../atoms/CustomButton";
 import {Box} from "@mui/material";
 
 const ReusableForm = ({ fields, onSubmit, validate }) => {
-
-
     const [formValues, setFormValues] = useState(
         fields.reduce((acc, field) => ({ ...acc, [field.name]: '' }), {})
     );
-
-
-
     const [formErrors, setFormErrors] = useState({});
 
     const handleChange = (e) => {
@@ -21,10 +16,9 @@ const ReusableForm = ({ fields, onSubmit, validate }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
+        alert(JSON.stringify(formValues))
         const errors = validate(formValues);
         if (Object.keys(errors).length === 0) {
-            alert(formValues["email"]+","+formValues["username"]);
             onSubmit(formValues);
         } else {
             setFormErrors(errors);

@@ -1,15 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { DashboardWrapper } from './Dashboard.styled';
+
+import DashboardMenu from "../DashboardMenu/DashboardMenu";
 
 const Dashboard = () => (
- <DashboardWrapper>
-    Dashboard Component
- </DashboardWrapper>
+ <DashboardMenu/>
 );
 
-Dashboard.propTypes = {};
 
-Dashboard.defaultProps = {};
 
 export default Dashboard;

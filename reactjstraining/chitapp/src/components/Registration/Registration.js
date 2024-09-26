@@ -40,7 +40,6 @@ const RegistrationForm = ({NewUserState}) => {
     ];
 
     const handleSubmit = (formData) => {
-        alert(JSON.stringify(formData))
         console.log('Form Submitted:', formData);
         NewUserState(false);
         // Make API call or handle registration logic here

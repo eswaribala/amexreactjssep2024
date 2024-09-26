@@ -1,21 +1,19 @@
 import React from 'react';
 import {TextField} from "@mui/material";
 
-const FormInput = ({ label, name, type, value, onChange, error}) => {
-
+const FormInput = ({ ...props }) => {
     return (
         <div style={{ marginBottom: '10px' }}>
-            <label>{label}</label>
+            <label>{props.label}</label>
             <TextField
                 fullWidth
                 margin="dense"
-                name={name}
-                type={type}
-                value={value}
-                onChange={onChange}
+              /*  props has children name,type onchange etc.,*/
+                {...props}
             />
 
-            {error && <span style={{ color: 'red' }}>{error}</span>}
+
+            {props.error && <span style={{ color: 'red' }}>{props.error}</span>}
         </div>
     );
 };

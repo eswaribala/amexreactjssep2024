@@ -11,7 +11,7 @@ import {Alert} from "@mui/lab";
 import ReCAPTCHA from "react-google-recaptcha";
 
 
-function Login({LoginState,ForgotPasswordState,NewUserState}){
+function Login({...props}){
 
     //step1 snackbar
     const [open,setOpen]=useState(false);
@@ -53,7 +53,7 @@ function Login({LoginState,ForgotPasswordState,NewUserState}){
                console.log(response.data.token);
 
                setOpen(true)
-               LoginState(true);
+               props.LoginState(true);
 
            },error=>{
                alert(error);
@@ -86,11 +86,11 @@ function Login({LoginState,ForgotPasswordState,NewUserState}){
      }
 
      function handleForgotPassword(){
-         ForgotPasswordState(true);
+         props.ForgotPasswordState(true);
      }
 
      function handleNewUser(){
-            NewUserState(true);
+            props.NewUserState(true);
      }
 
     return(
