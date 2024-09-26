@@ -34,7 +34,7 @@
 }
 
 .Section-header {
-  background-color: beige;
+
   display: flex;
   flex-direction: row;
   align-items: center;

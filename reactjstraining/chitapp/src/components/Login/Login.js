@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {Box, Button, Snackbar, TextField} from "@mui/material";
 import './Login.css'
 import {CustomTextField} from "../atoms/CustomTextField";
@@ -8,12 +8,20 @@ import {useFormik} from "formik";
 import axios from "axios";
 import {LoginUrl} from '../../resources/configurations/config'
 import {Alert} from "@mui/lab";
+import ReCAPTCHA from "react-google-recaptcha";
 
-function Login({LoginState}){
+
+function Login({LoginState,ForgotPasswordState,NewUserState}){
 
     //step1 snackbar
     const [open,setOpen]=useState(false);
     const [pass,setPass]=useState(false);
+    const [captchaValue, setCaptchaValue] = useState(null);
+    const [errorMessage, setErrorMessage] = useState("");
+    const handleCaptchaChange = (value) => {
+        setCaptchaValue(value);
+        console.log("Captcha value:", value);
+    };
 
     const yupValidationSchema=yup.object({
         email:yup.string("Enter Email").email("Enter Valid Email").required("Must Enter email"),
@@ -29,6 +37,12 @@ function Login({LoginState}){
 
 
         onSubmit:function(values){
+
+            // Check if CAPTCHA is solved
+            if (!captchaValue) {
+                setErrorMessage("Please verify that you are not a robot.");
+                return;
+            }
             let data={
                 "email":values.email,
                 "password":values.password
@@ -37,12 +51,14 @@ function Login({LoginState}){
 
            axios.post(LoginUrl,data).then(response=>{
                console.log(response.data.token);
+
                setOpen(true)
                LoginState(true);
 
            },error=>{
                alert(error);
                setPass(true);
+
            })
 
             /*
@@ -69,14 +85,24 @@ function Login({LoginState}){
         setOpen(false);
      }
 
+     function handleForgotPassword(){
+         ForgotPasswordState(true);
+     }
+
+     function handleNewUser(){
+            NewUserState(true);
+     }
 
     return(
-        <Box sx={{ p: 2, width:'30%' }}>
+        <Box sx={{p: 2, width: '30%'}}>
+            <p> Forgot Password?
+                <a href="#" onClick={handleForgotPassword}>Forgot Password</a>
+            </p>
             <Snackbar open={open}
                       autoHideDuration={5000}
                       onClose={handleClose}
                       sx={{
-                          '&.MuiSnackbar-root': { top: '1%', left:'50%' }
+                          '&.MuiSnackbar-root': {top: '1%', left: '50%'}
                       }}>
                 <Alert onClose={handleClose}
                        severity="success"
@@ -85,13 +111,13 @@ function Login({LoginState}){
 
                            width: '100%'
                        }}>
-                Login Successful
+                    Login Successful
                 </Alert>
 
             </Snackbar>
 
 
-            <form onSubmit={formik.handleSubmit} >
+            <form onSubmit={formik.handleSubmit}>
                 <fieldset>
                     <legend className="legend">Customer Login</legend>
                     <CustomTextField id="email" label="Email" type="email" value={formik.values.email}
@@ -102,7 +128,7 @@ function Login({LoginState}){
 
                     />
                     {
-                        (pass)?<p>Invalid Password</p>:<p></p>
+                        (pass) ? <p>Invalid Password</p> : <p></p>
 
                     }
                     <CustomTextField id="password" label="Password" type="password" value={formik.values.password}
@@ -113,10 +139,22 @@ function Login({LoginState}){
 
 
                     />
-                   {/* <CustomTextField id="captcha" label="captcha"/>*/}
-                    <CustomButton text="Login" type="submit" color="success" variant="contained" ></CustomButton>
+
+
+                    <ReCAPTCHA
+                        sitekey={process.env.REACT_APP_SITE_KEY} // Replace this with your actual site key
+                        onChange={handleCaptchaChange}
+                    />
+                    {errorMessage && <p style={{color: "red"}}>{errorMessage}</p>}
+                    {/* <CustomTextField id="captcha" label="captcha"/>*/}
+                    <CustomButton text="Login" type="submit" color="success" variant="contained"></CustomButton>
+
                 </fieldset>
+
             </form>
+            <p> New User?
+                <a href="#" onClick={handleNewUser}>New User</a>
+            </p>
         </Box>
     )
 
