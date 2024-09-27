@@ -1,15 +1,18 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { ReceiptsWrapper } from './Receipts.styled';
+import {useSelector} from "react-redux";
 
-const Receipts = () => (
- <ReceiptsWrapper>
-    Receipts Component
- </ReceiptsWrapper>
-);
 
-Receipts.propTypes = {};
+function Receipts(){
+    // Get the checkbox state from Redux
+    const isChecked = useSelector((state) => state.isChecked);
 
-Receipts.defaultProps = {};
+    return (
+        <div>
+            <h2>Checkbox Status</h2>
+            <p>{isChecked ? 'Payment Done' : 'Not Done'}</p>
+        </div>
+    );
+
+}
 
 export default Receipts;

@@ -1,15 +1,29 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { DuePaymentsWrapper } from './DuePayments.styled';
+import {useDispatch, useSelector} from "react-redux";
+import {toggleCheckbox} from "../../reduxsrc/actions/actions";
 
-const DuePayments = () => (
- <DuePaymentsWrapper>
-    DuePayments Component
- </DuePaymentsWrapper>
-);
+export function DuePayments(){
 
-DuePayments.propTypes = {};
+    // Get the current checkbox state from Redux
+    const isChecked = useSelector((state) => state.isChecked);
+    const dispatch = useDispatch();
 
-DuePayments.defaultProps = {};
+    // Handle the checkbox change event and dispatch the action
+    const handleCheckboxChange = (e) => {
+        dispatch(toggleCheckbox(e.target.checked));
+    };
 
-export default DuePayments;
+    return (
+        <div>
+            <label>
+                <input
+                    type="checkbox"
+                    checked={isChecked}
+                    onChange={handleCheckboxChange}
+                />
+                Is Payment Completed?
+            </label>
+        </div>
+    );
+
+}

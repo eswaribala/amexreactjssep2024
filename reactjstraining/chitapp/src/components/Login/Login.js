@@ -18,6 +18,7 @@ function Login({...props}){
     const [pass,setPass]=useState(false);
     const [captchaValue, setCaptchaValue] = useState(null);
     const [errorMessage, setErrorMessage] = useState("");
+
     const handleCaptchaChange = (value) => {
         setCaptchaValue(value);
         console.log("Captcha value:", value);
@@ -30,8 +31,8 @@ function Login({...props}){
 
     const formik=useFormik({
         initialValues:{
-            email:"",
-            password:""
+            email:"eve.holt@reqres.in",
+            password:"Test@123"
         },
         validationSchema:yupValidationSchema,
 
@@ -51,7 +52,7 @@ function Login({...props}){
 
            axios.post(LoginUrl,data).then(response=>{
                console.log(response.data.token);
-
+               sessionStorage.setItem("email",data.email);
                setOpen(true)
                props.LoginState(true);
 

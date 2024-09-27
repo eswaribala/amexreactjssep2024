@@ -1,12 +1,20 @@
 import React, {useEffect, useState} from 'react';
 import {Box, Tab, Tabs} from "@mui/material";
 import {TabContext, TabList, TabPanel} from "@mui/lab";
-import {Link, Route, Routes, useLocation} from "react-router-dom";
+import {Link, Navigate, Route, Routes, useLocation} from "react-router-dom";
 import Home from "../Home/Home";
-import DuePayments from "../DuePayments/DuePayments";
+import {DuePayments} from "../DuePayments/DuePayments";
 import MyTickets from "../MyTickets/MyTickets";
 import Receipts from "../Receipts/Receipts";
 import More from "../More/More";
+import Login from "../Login/Login";
+import BranchLocator from "../BranchLocator/BranchLocator";
+import NewVacancy from "../NewVacancy/NewVacancy";
+import FAQ from "../FAQ/FAQ";
+import DataFetcher from "../DataFetcher/DataFetcher";
+
+// Wrap ItemList with withData HOC
+const EnhancedItemList = DataFetcher('https://jsonplaceholder.typicode.com/users')(FAQ);
 
 
 function DashboardMenu(){
@@ -18,18 +26,23 @@ function DashboardMenu(){
     function handleChange(event,value){
            setValue(value)
     }*/
-    const pathName=useLocation();
+    const location = useLocation();
+    const [value, setValue] = useState(location.pathname);
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
     return(
         <div>
-        <Box sx={{p: 2, width: '70%'}}>
-            <TabContext value={pathName}>
+        <Box sx={{p: 2, width: '40%', marginLeft:'25%',     backgroundColor:'lightBlue', fontSize:'large', justifyContent:'center'}}>
+            <TabContext value={value} onChange={handleChange}>
                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                    <Tabs value={pathName}>
+                    <Tabs value={value}    centered>
                         <Tab label="Home" component={Link} to={"/home"} value={"/home"}  />
                         <Tab label="Due Payments"  component={Link} to={"/duepayments"} value={"/duepayments"}  />
                         <Tab label="My Tickets"  component={Link} to={"/mytickets"} value={"/mytickets"}   />
                         <Tab label="Receipts" component={Link} to={"/receipts"} value={"/receipts"}   />
-                        <Tab label="More" component={Link} to={"/more"} value={"/more"}  />
+                        <Tab label="More" component={Link} to={"/more"} value={"/more"}   />
+
                     </Tabs>
                 </Box>
                {/* <TabPanel value="1">Home</TabPanel>
@@ -40,11 +53,16 @@ function DashboardMenu(){
             </TabContext>
         </Box>
         <Routes>
+
             <Route path={"/home"}  element={<Home/>}/>
             <Route path={"/duepayments"}  element={<DuePayments/>}/>
             <Route path={"/mytickets"}  element={<MyTickets/>}/>
              <Route path={"/receipts"}  element={<Receipts/>}/>
-            <Route path={"/more"}  element={<More/>}/>
+            <Route path={"/more"}  element={<More/>}>
+                <Route path={"/more/branchlocator"} element={<BranchLocator/>}/>
+                <Route path={"/more/newvacancy"}  element={<NewVacancy/>}/>
+                <Route path={"/more/faq"}  element={<EnhancedItemList/>}/>
+            </Route>
 
         </Routes>
         </div>
