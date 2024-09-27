@@ -1,17 +1,17 @@
 import React, {useContext} from 'react';
 import {faker} from '@faker-js/faker'
 
-import {MyContext} from "../Dashboard/Dashboard";
+//import {MyContext} from "../Dashboard/Dashboard";
 
 const FAQ = ({dataFetcherResponse}) => {
-    const { email, setEmail } = useContext(MyContext);
+    //const { email, setEmail } = useContext(MyContext);
     return (
         <div>
-            <h1>{email}</h1>
+           {/* <h1>{email}</h1>
             <button onClick={() => setEmail(faker.internet.email())}>
                 Click me
             </button>
-
+*/}
 
             <ul>
                 {dataFetcherResponse.map((item) => (

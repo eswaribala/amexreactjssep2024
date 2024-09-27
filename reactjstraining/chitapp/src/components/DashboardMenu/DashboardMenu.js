@@ -13,6 +13,7 @@ import NewVacancy from "../NewVacancy/NewVacancy";
 import FAQ from "../FAQ/FAQ";
 import DataFetcher from "../DataFetcher/DataFetcher";
 import {FetchUsersUrl} from "../../resources/configurations/config";
+import ViewTickets from "../ViewTickets/ViewTickets";
 
 // Wrap ItemList with withData HOC
 const EnhancedItemList = DataFetcher('https://jsonplaceholder.typicode.com/users')(FAQ);
@@ -42,6 +43,7 @@ function DashboardMenu(){
                         <Tab label="Due Payments"  component={Link} to={"/duepayments"} value={"/duepayments"}  />
                         <Tab label="My Tickets"  component={Link} to={"/mytickets"} value={"/mytickets"}   />
                         <Tab label="Receipts" component={Link} to={"/receipts"} value={"/receipts"}   />
+                        <Tab label="View Tickets" component={Link} to={"/viewtickets"} value={"/viewtickets"}   />
                         <Tab label="More" component={Link} to={"/more"} value={"/more"}   />
 
                     </Tabs>
@@ -59,6 +61,7 @@ function DashboardMenu(){
             <Route path={"/duepayments"}  element={<DuePayments/>}/>
             <Route path={"/mytickets"}  element={<MyTickets/>}/>
              <Route path={"/receipts"}  element={<Receipts/>}/>
+            <Route path={"/viewtickets"}  element={<ViewTickets/>}/>
             <Route path={"/more"}  element={<More/>}>
                 <Route path={"/more/branchlocator"} element={<BranchLocator/>}/>
                 <Route path={"/more/newvacancy"}  element={<NewVacancy/>}/>

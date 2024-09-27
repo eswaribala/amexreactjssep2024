@@ -3,17 +3,17 @@ import React, {useEffect, useState} from 'react';
 import DashboardMenu from "../DashboardMenu/DashboardMenu";
 import { createContext } from 'react';
 
-export const MyContext = createContext("");
+export const TicketContext = createContext("");
 const Dashboard = () => {
-    const [email, setEmail] = useState("");
+    const [tickets, setTickets] = useState([]);
     useEffect(() => {
-        setEmail(sessionStorage.getItem("email"))
-    }, []);
+        setTickets(sessionStorage.getItem("tickets"))
+    }, [tickets]);
     return(
         <div>
-            <MyContext.Provider value={{ email, setEmail }}>
+            <TicketContext.Provider value={{ tickets, setTickets}}>
                <DashboardMenu/>
-            </MyContext.Provider>
+            </TicketContext.Provider>
         </div>
     );
 }
