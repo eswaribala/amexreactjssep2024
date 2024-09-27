@@ -8,6 +8,7 @@ function NewVacancy(){
     const handleSubmit = (event) => {
         event.preventDefault();
         //uncontrolled element
+        //alert(event.target.value);
         const name = nameInputRef.current.value;
         alert(`Name: ${name}, Age: ${age}`);
     };

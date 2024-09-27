@@ -11,7 +11,7 @@ import EventNoteIcon from '@mui/icons-material/EventNote';
 import CallIcon from '@mui/icons-material/Call';
 import {DataGrid} from "@mui/x-data-grid";
 
-function Home(){
+function Home({dataFetcherResponse}){
 
     const [response,setResponse]=useState('');
     const [chits,setChits]=useState([]);
@@ -36,19 +36,25 @@ function Home(){
                 faker.number.int(10000,20000)))
        }
        setChits(data);
+      // if(dataFetcherResponse.length>0) {
+          console.log(dataFetcherResponse);
+          let filteredData = dataFetcherResponse.data.filter(item => item.email === (sessionStorage.getItem("email")))
+           console.log(filteredData);
+           setResponse(filteredData);
+     //  }
 
-
-        axios.get(FetchUsersUrl).then(resp=>{
-          /*
+      /*  axios.get(FetchUsersUrl).then(resp=>{
+          /!*
             let filteredData= response.data.filter(item=>(item.genre.includes('Action')));
             console.log(filteredData)
             setResponse(filteredData);
 
-           */
+           *!/
             let filteredData=resp.data.data.filter(item=>item.email===(sessionStorage.getItem("email")))
             console.log(filteredData);
             setResponse(filteredData);
         })
+    */
 
     }
 

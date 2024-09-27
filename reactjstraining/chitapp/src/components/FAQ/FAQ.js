@@ -3,7 +3,7 @@ import {faker} from '@faker-js/faker'
 
 import {MyContext} from "../Dashboard/Dashboard";
 
-const FAQ = ({data}) => {
+const FAQ = ({dataFetcherResponse}) => {
     const { email, setEmail } = useContext(MyContext);
     return (
         <div>
@@ -14,7 +14,7 @@ const FAQ = ({data}) => {
 
 
             <ul>
-                {data.map((item) => (
+                {dataFetcherResponse.map((item) => (
                     <li key={item.id}>{item.address.city}->{item.address.zipcode}</li> // Assuming item objects have id and title properties
                 ))}
             </ul>

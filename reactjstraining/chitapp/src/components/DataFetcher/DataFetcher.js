@@ -32,7 +32,7 @@ const DataFetcher = (url) => (WrappedComponent) => {
         if (error) return <p>Error: {error}</p>;
 
         // Pass the fetched data to the wrapped component
-        return <WrappedComponent data={data} {...props} />;
+        return <WrappedComponent dataFetcherResponse={data} {...props} />;
     };
 };
 export default DataFetcher;

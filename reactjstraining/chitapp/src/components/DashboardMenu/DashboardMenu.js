@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Box, Tab, Tabs} from "@mui/material";
 import {TabContext, TabList, TabPanel} from "@mui/lab";
-import {Link, Navigate, Route, Routes, useLocation} from "react-router-dom";
+import {Link, Navigate, Outlet, Route, Routes, useLocation} from "react-router-dom";
 import Home from "../Home/Home";
 import {DuePayments} from "../DuePayments/DuePayments";
 import MyTickets from "../MyTickets/MyTickets";
@@ -12,10 +12,11 @@ import BranchLocator from "../BranchLocator/BranchLocator";
 import NewVacancy from "../NewVacancy/NewVacancy";
 import FAQ from "../FAQ/FAQ";
 import DataFetcher from "../DataFetcher/DataFetcher";
+import {FetchUsersUrl} from "../../resources/configurations/config";
 
 // Wrap ItemList with withData HOC
 const EnhancedItemList = DataFetcher('https://jsonplaceholder.typicode.com/users')(FAQ);
-
+const HomeWrapper=DataFetcher(FetchUsersUrl)(Home);
 
 function DashboardMenu(){
 
@@ -54,7 +55,7 @@ function DashboardMenu(){
         </Box>
         <Routes>
 
-            <Route path={"/home"}  element={<Home/>}/>
+            <Route path={"/home"}  element={<HomeWrapper/>}/>
             <Route path={"/duepayments"}  element={<DuePayments/>}/>
             <Route path={"/mytickets"}  element={<MyTickets/>}/>
              <Route path={"/receipts"}  element={<Receipts/>}/>
@@ -65,6 +66,7 @@ function DashboardMenu(){
             </Route>
 
         </Routes>
+
         </div>
     )
 }
